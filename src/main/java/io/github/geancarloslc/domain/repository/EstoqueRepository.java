@@ -1,4 +1,5 @@
 package io.github.geancarloslc.domain.repository;
+
 import io.github.geancarloslc.domain.entity.Estoque;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
