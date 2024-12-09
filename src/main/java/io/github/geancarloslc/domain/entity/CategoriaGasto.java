@@ -1,11 +1,15 @@
 package io.github.geancarloslc.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "categoria_gasto")
 public class CategoriaGasto {
@@ -17,8 +21,5 @@ public class CategoriaGasto {
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
-
-    @Column(name = "descricao", length = 255)
-    private String descricao;
 
 }
