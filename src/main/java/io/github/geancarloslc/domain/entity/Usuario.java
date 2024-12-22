@@ -2,10 +2,7 @@ package io.github.geancarloslc.domain.entity;
 
 import io.github.geancarloslc.api.dto.UsuarioDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -39,7 +36,6 @@ public class Usuario {
         usuarioDto.setId(this.id);
         usuarioDto.setNome(this.nome);
         usuarioDto.setEmail(this.email);
-        usuarioDto.setSenha(this.senha);
         usuarioDto.setDataCriacao(this.dataCriacao);
         return usuarioDto;
     }

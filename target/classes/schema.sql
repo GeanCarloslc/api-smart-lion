@@ -19,14 +19,12 @@ COMMENT ON COLUMN usuario.data_criacao IS 'Data e hora de criação do usuário'
 CREATE TABLE categoria_gasto (
     id SERIAL PRIMARY KEY,  -- Identificador único da categoria de gasto
     nome VARCHAR(100) NOT NULL,  -- Nome da categoria de gasto (exemplo: Alimentação, Transporte, etc.)
-    descricao VARCHAR(255)  -- Descrição detalhada da categoria de gasto
 );
 
 -- Adicionando comentários para a tabela e colunas
 COMMENT ON TABLE categoria_gasto IS 'Tabela que armazena as categorias de gasto';
 COMMENT ON COLUMN categoria_gasto.id IS 'Identificador único da categoria de gasto';
 COMMENT ON COLUMN categoria_gasto.nome IS 'Nome da categoria de gasto';
-COMMENT ON COLUMN categoria_gasto.descricao IS 'Descrição detalhada da categoria de gasto';
 
 -- Tabela de Recursos do Usuário
 CREATE TABLE recursos_usuario (
