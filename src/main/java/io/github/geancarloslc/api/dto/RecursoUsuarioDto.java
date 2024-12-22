@@ -1,13 +1,11 @@
 package io.github.geancarloslc.api.dto;
 
 import io.github.geancarloslc.domain.entity.RecursosUsuario;
-import io.github.geancarloslc.domain.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

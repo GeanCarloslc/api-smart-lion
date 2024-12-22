@@ -10,6 +10,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RecursoUsuarioServiceImpl implements RecursoUsuarioService {
@@ -17,36 +18,10 @@ public class RecursoUsuarioServiceImpl implements RecursoUsuarioService {
     @Autowired
     private RecursoUsuarioRepository recursoUsuarioRepository;
 
-//    @Override
-//    public Page<RecursoUsuarioRequest> buscarTodosItensEstoque(RecursoUsuarioRequest filtroRecursoUsuarioRequest) {
-//        Estoque estoque = new Estoque();
-//        //estoque.setDescricao(filtroEstoqueDTO.getDescricao());
-//        Pageable pageable = PageRequest.of(0, 1);
-//        ExampleMatcher exampleMatcher = ExampleMatcher
-//                .matching()
-//                .withIgnoreCase()
-//                .withStringMatcher( ExampleMatcher.StringMatcher.CONTAINING );
-//        //ExampleMatcher.StringMatcher.CONTAINING, similar ao like do SQL
-//        Example exampleEstoque = Example.of(estoque, exampleMatcher);
-//        Page<Estoque> all = recursoUsuarioRepository.findAll(exampleEstoque, filtroRecursoUsuarioRequest.getPageable());
-//        return converterEstoqueDTO(all);
-//    }
-//
-//    private Page<RecursoUsuarioRequest> converterEstoqueDTO(Page<Estoque> estoqueList){
-//        if(estoqueList.isEmpty()){
-//            return new PageImpl<>(new ArrayList<RecursoUsuarioRequest>());
-//        }
-//        RecursoUsuarioRequest recursoUsuarioRequest = new RecursoUsuarioRequest();
-//        Page<RecursoUsuarioRequest> pageObjectDto = recursoUsuarioRequest.toPageObjectDto(estoqueList);
-//
-//        return pageObjectDto;
-//    }
-
     @Override
-    public Page<RecursoUsuarioDto> buscarTodosRecursosUsuario(RecursoUsuarioDto filtroRecursoUsuarioRequest, Pageable pageable) {
+    public Page<RecursoUsuarioDto> buscarTodos(Pageable pageable) {
         RecursosUsuario recursosUsuario = new RecursosUsuario();
         recursosUsuario.setUsuario(new Usuario(1L));
-        recursosUsuario.setData(filtroRecursoUsuarioRequest.getData());
         ExampleMatcher exampleMatcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
@@ -56,6 +31,22 @@ public class RecursoUsuarioServiceImpl implements RecursoUsuarioService {
         Page<RecursosUsuario> recursosUsuarioPage = recursoUsuarioRepository.findAll(exampleRecursosUsuario, pageable);
 
         return converteRecursoUsuarioPageDto(recursosUsuarioPage);
+    }
+
+    @Override
+    public void salvar(RecursoUsuarioDto recursoUsuarioDto) {
+        RecursosUsuario recursosUsuario = new RecursosUsuario(
+                recursoUsuarioDto.getId(),
+                recursoUsuarioDto.getUsuarioDto().getId(),
+                recursoUsuarioDto.getData(),
+                recursoUsuarioDto.getRenda());
+
+        recursoUsuarioRepository.save(recursosUsuario);
+    }
+
+    @Override
+    public void excluir(List<Long> ids) {
+        recursoUsuarioRepository.deleteAllById(ids);
     }
 
     private Page<RecursoUsuarioDto> converteRecursoUsuarioPageDto(Page<RecursosUsuario> recursosUsuarioPage) {
