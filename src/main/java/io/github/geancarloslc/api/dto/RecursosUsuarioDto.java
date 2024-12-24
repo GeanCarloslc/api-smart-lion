@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RecursoUsuarioDto {
+public class RecursosUsuarioDto {
     private Long id;
     private BigDecimal renda;
     private LocalDateTime data;
     private UsuarioDto usuarioDto;
 
-    public RecursoUsuarioDto(String data) {
+    public RecursosUsuarioDto(String data) {
         this.data = data != null ? LocalDateTime.parse(data) : null;
     }
 
-    public Page<RecursoUsuarioDto> toPageObjectDto(Page<RecursosUsuario> recursosUsuario) {
+    public Page<RecursosUsuarioDto> toPageObjectDto(Page<RecursosUsuario> recursosUsuario) {
         return recursosUsuario.map(this::converterParaRecursosUsuarioDto);
     }
 
-    private RecursoUsuarioDto converterParaRecursosUsuarioDto(RecursosUsuario recursosUsuario) {
-        RecursoUsuarioDto recursoUsuarioDto = new RecursoUsuarioDto();
-        recursoUsuarioDto.setId(recursosUsuario.getId());
-        recursoUsuarioDto.setData(recursosUsuario.getData());
-        recursoUsuarioDto.setRenda(recursosUsuario.getRenda());
+    private RecursosUsuarioDto converterParaRecursosUsuarioDto(RecursosUsuario recursosUsuario) {
+        RecursosUsuarioDto recursosUsuarioDto = new RecursosUsuarioDto();
+        recursosUsuarioDto.setId(recursosUsuario.getId());
+        recursosUsuarioDto.setData(recursosUsuario.getData());
+        recursosUsuarioDto.setRenda(recursosUsuario.getRenda());
 
-        recursoUsuarioDto.setUsuarioDto(recursosUsuario.getUsuario().toDto());
+        recursosUsuarioDto.setUsuarioDto(recursosUsuario.getUsuario().toDto());
         //conversion here
-        return recursoUsuarioDto;
+        return recursosUsuarioDto;
     }
 }

@@ -36,11 +36,20 @@ public class Gasto {
     @Column(name = "descricao", columnDefinition = "TEXT")
     private String descricao;
 
-    @Column(name = "data", nullable = false)
-    private LocalDateTime data;
+    @Column(name = "data_inclusao", nullable = false)
+    private LocalDateTime dataInclusao;
+
+    @Column(name = "data_edicao")
+    private LocalDateTime dataEdicao;
 
     @ManyToOne
     @JoinColumn(name = "recursos_usuario_id")
     private RecursosUsuario recursosUsuario;
+
+
+    public void editado(){
+        this.dataEdicao = LocalDateTime.now();
+    }
+
 
 }

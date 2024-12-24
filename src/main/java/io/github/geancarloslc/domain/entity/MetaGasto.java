@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,9 +22,9 @@ public class MetaGasto {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "categoria_id", nullable = false)
-    private CategoriaGasto categoria;
+    private CategoriaGasto categoriaGasto;
 
     @Column(name = "valor_meta", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorMeta;
@@ -31,5 +32,23 @@ public class MetaGasto {
     @ManyToOne
     @JoinColumn(name = "recursos_usuario_id", nullable = false)
     private RecursosUsuario recursosUsuario;
+
+    @Column(name = "data_inclusao", nullable = false)
+    private LocalDateTime dataInclusao;
+
+    @Column(name = "data_edicao")
+    private LocalDateTime dataEdicao;
+
+
+    public MetaGasto(Long categoriaId, BigDecimal valorMeta, Long recursosUsuarioId) {
+        this.categoriaGasto = new CategoriaGasto(categoriaId);
+        this.valorMeta = valorMeta;
+        this.recursosUsuario = new RecursosUsuario(recursosUsuarioId);
+        this.dataInclusao = LocalDateTime.now();
+    }
+
+    public void editado(){
+        this.dataEdicao = LocalDateTime.now();
+    }
 
 }
